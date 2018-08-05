@@ -1,5 +1,7 @@
 package bookRank.model;
 
+import java.util.ArrayList;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -15,19 +17,38 @@ public class Book {
 	public int month;
 	public String color;
 	public String title;
+	public int popularity;
+	public double averageRating;
 	
-	public Book(int id, String row, int year, int month, String row2, String row3) {
+	public Book(int id, String isbn, int year, int month, String color, String title) {
 		this.id = id;
-		this.ISBN = row;
+		this.ISBN = isbn;
 		this.year = year;
 		this.month = month;
-		this.color = row2;
-		this.title = row3;
+		this.color = color;
+		this.title = title;
+		this.popularity = 0;
+		this.averageRating = 0;
+	}
+
+	@Override
+	public String toString() {
+		return "Book [id=" + id + ", ISBN=" + ISBN + ", year=" + year + ", month=" + month + ", color=" + color
+				+ ", title=" + title + ", popularity=" + popularity + ", averageRating=" + averageRating + "]";
 	}
 	
-	public String toString() {
-		return "ID: " + this.id + " ISBN: "
-				+ this.id + " YEAR: " + this.id + " MONTH: " + this.id
-				+ " COLOR: " + this.id + " TITLE: " + this.title;
+	public void addReview(Review review) {
+		double prevTotal = this.popularity * this.averageRating; 
+		this.popularity += 1;
+		this.averageRating = (prevTotal + review.rating) / this.popularity;
+		double l = (double) (this.averageRating * 100);
+		l = Math.round(l);
+		this.averageRating = (double) (l / 100);
+	}
+	
+	public void addReviews(ArrayList<Review> reviews) {
+		for (Review review : reviews) {
+			this.addReview(review);
+		}
 	}
 }

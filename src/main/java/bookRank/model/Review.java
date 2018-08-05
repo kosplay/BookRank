@@ -23,4 +23,10 @@ public class Review {
 		this.rating = rating;
 		this.content = content;
 	}
+
+	@Override
+	public String toString() {
+		return "Review [id=" + id + ", user_id=" + user_id + ", book_id=" + book_id + ", rating=" + rating
+				+ ", content=" + content + "]";
+	}
 }

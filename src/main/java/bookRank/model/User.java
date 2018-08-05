@@ -21,6 +21,9 @@ public class User {
 		this.last_name = last_name;
 		this.email = email;
 	}
-	
-	
+
+	@Override
+	public String toString() {
+		return "User [id=" + id + ", first_name=" + first_name + ", last_name=" + last_name + ", email=" + email + "]";
+	}
 }

@@ -1,6 +1,3 @@
-/**
- * Controllers specify allowed actions on entities.
- */
 package bookRank.controller;
 
 import bookRank.model.*;
@@ -16,9 +13,10 @@ import com.opencsv.*;
  *	Immutable user. 
  */
 public class UserController {
-	ArrayList<User> list;
+	public ArrayList<User> list;
 	
 	public UserController() {
+		list = new ArrayList<User>();
 		try {
 	        // Create an object of file reader
 	        // class with CSV file as a parameter.
@@ -35,6 +33,7 @@ public class UserController {
 	            User user = new User(Integer.parseInt(row[0]), row[1], row[2], row[3]);
 	            this.list.add(user);
 	        }
+	        System.out.println("Loaded users");
 	    }
 	    catch (Exception e) {
 	        e.printStackTrace();
