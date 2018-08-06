@@ -1,14 +1,6 @@
 package bookRank.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-
-@Entity
 public class Review {
-	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
 	public int id;
 	public int user_id;
 	public int book_id;

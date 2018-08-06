@@ -1,6 +1,7 @@
 package bookRank.controller;
 
 import bookRank.model.*;
+import bookRank.sorting.*;
 
 import java.io.File;
 import java.io.FileReader;
@@ -15,6 +16,8 @@ import com.opencsv.*;
  */
 public class BookController {
 	public ArrayList<Book> list;
+	public ArrayList<Book> quickSorted;
+	public ArrayList<Book> bubbleSorted;
 	
 	public BookController() {
 		list = new ArrayList<Book>();
@@ -41,6 +44,16 @@ public class BookController {
 	    }
 	}
 	
+	public void quickSort(String sortBy) {
+		this.quickSorted = (ArrayList<Book>) list.clone();
+		this.quickSorted = QuickSort.sort(quickSorted, sortBy);
+	}
+	
+	public void bubbleSort(String sortBy) {
+		this.bubbleSorted = (ArrayList<Book>) list.clone();
+		this.bubbleSorted = (ArrayList<Book>) BubbleSort.sort(bubbleSorted, sortBy);
+	}
+	
 	public Book create(String isbn, int year, int month, String color, String title) {
 		int id = list.size() + 1;
 		Book newBook = new Book(id, isbn, year, month, color, title);
@@ -56,11 +69,11 @@ public class BookController {
 		return null;
 	}
 	
-	public ArrayList<Book> getBooks(int start) {
+	public ArrayList<Book> getBooks(ArrayList<Book> books, int start) {
 		ArrayList<Book> result = new ArrayList<Book>();
 		int end = start+10;
 		for (int i=start; i<end; i++) {
-			result.add(list.get(i));
+			result.add(books.get(i));
 		}
 		return result;
 	}

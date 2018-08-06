@@ -93,16 +93,18 @@ public class BookRankApplication {
 	public void execute(int command) {
 		switch (command) {
 		case 1:
-			this.showBooks(0);
+			this.showBooks(bookCtl.list, 0);
 			break;
 		case 2:
 			this.showReviews(0);
 			break;
 		case 3:
-			this.showBooks(0);
+			bookCtl.quickSort("popularity");
+			this.showBooks(bookCtl.quickSorted, 0);
 			break;
 		case 4:
-			this.showBooks(0);
+			bookCtl.bubbleSort("popularity");
+			this.showBooks(bookCtl.quickSorted, 0);
 			break;
 		case 5:
 			this.addNewBook();
@@ -117,10 +119,12 @@ public class BookRankApplication {
 			this.addReview();
 			break;
 		case 9:
-			this.showBooks(0);
+			bookCtl.quickSort("averageRating");
+			this.showBooks(bookCtl.quickSorted, 0);
 			break;
 		case 10:
-			this.showBooks(0);
+			bookCtl.bubbleSort("averageRating");
+			this.showBooks(bookCtl.quickSorted, 0);
 			break;
 		case 11:
 			this.searchByBookTitleWord();
@@ -130,8 +134,8 @@ public class BookRankApplication {
 		}
 	}
 	
-	private void showBooks(int start) {
-		ArrayList<Book> books = bookCtl.getBooks(start);
+	private void showBooks(ArrayList<Book> allBooks, int start) {
+		ArrayList<Book> books = bookCtl.getBooks(allBooks, start);
 		for (Book b: books) {
 			System.out.println(b.toString());
 		}
@@ -140,7 +144,7 @@ public class BookRankApplication {
 		 System.out.print("Would you like to see 10 more? (y/n): ");
 		 String response = scanner.next();
 		 if (response.equalsIgnoreCase("Y")) {
-			 this.showBooks(start + 10);
+			 this.showBooks(allBooks, start + 10);
 		 } else {
 			 this.promptActions();
 		 }
