@@ -15,6 +15,18 @@ import com.opencsv.*;
  */
 public class BookController {
 	public ArrayList<Book> list;
+	public void bubbleSort() {
+		for ( int i = 0; i < list.size(); i++ ) {
+			for ( int j = 0; j < list.size(); j++ ) {
+				if ( list.get(i).popularity > list.get(j).popularity ) {
+					Book t = list.get(j);
+					list.set(j, list.get(i));
+					list.set(i,t);
+				}
+			}
+
+		}
+	}
 	
 	public BookController() {
 		list = new ArrayList<Book>();
